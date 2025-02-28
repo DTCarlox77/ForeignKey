@@ -1,0 +1,79 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+Agregar frutas
+{% endblock title %}
+
+{% block content %}
+  
+<div class="container mx-auto px-4 py-8">
+
+  <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
+    <!-- Agregar el action -->
+    <form class="space-y-6" action="" method="POST">
+      {% csrf_token %}
+
+      <div>
+        <label for="fruitName" class="block text-sm font-medium text-gray-700 mb-1">
+          Nombre de la Fruta *
+        </label>
+        <input type="text" id="fruitName" name="nombre" 
+          class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors"
+          placeholder="Ej: Manzana">
+      </div>
+      
+      <div>
+        <label for="fruitImg" class="block text-sm font-medium text-gray-700 mb-1">
+          Imagen de la Fruta *
+        </label>
+        <input type="text" id="fruitImg" name="imagen" 
+          class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors"
+          placeholder="Ej: Manzana">
+      </div>
+
+      <div>
+        <label for="price" class="block text-sm font-medium text-gray-700 mb-1">
+          Precio
+        </label>
+        <!-- Corregir el error con la coma de django -->
+        <div class="relative">
+          <span class="absolute left-3 top-2 text-gray-500">NIO</span>
+          <input type="number" id="price" name="precio" min="0" step="0.01"
+            class="w-full pl-8 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors"
+            placeholder="0.00">
+        </div>
+      </div>
+
+      <div>
+        <label for="category" class="block text-sm font-medium text-gray-700 mb-1">
+          Categoría
+        </label>
+        <select id="category" name="categoria"
+          class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors">
+          <option value="">Seleccionar categoría</option>
+          
+          <!-- Acá estamos renderizando nuestras propias categorías -->
+          {% for categoria in categorias %}
+            <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="flex gap-4">
+        <button type="submit"
+          class="flex-1 bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors duration-300">
+          Guardar Fruta
+        </button>
+        <!-- En el href agregar un url que me redirija hacia donde están todas las frutas -->
+        <a href="">
+          <button type="button"
+            class="flex-1 bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors duration-300">
+            Cancelar
+          </button>
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

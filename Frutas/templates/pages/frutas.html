@@ -1,0 +1,32 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+Frutas
+{% endblock title %}
+
+{% block content %}
+
+<main class="container mx-auto px-4 py-8">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+
+    {% for fruta in frutas %}
+
+    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      <img src="{{ fruta.imagen }}" alt="Apple" class="w-full h-48 object-cover">
+      <div class="p-4">
+        <h2 class="text-xl font-semibold text-gray-800">{{ fruta.nombre }}</h2>
+        <div class="flex justify-between items-center mt-2">
+          <span class="text-green-600 font-bold">NIO {{ fruta.precio }}</span>
+          <button class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-full text-sm">{{ fruta.proveedor.username }}</button>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+
+
+  </div>
+</main>
+
+{% endblock content %}
