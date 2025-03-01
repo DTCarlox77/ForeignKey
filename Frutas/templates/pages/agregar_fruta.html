@@ -10,7 +10,8 @@ Agregar frutas
 
   <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
     <!-- Agregar el action -->
-    <form class="space-y-6" action="" method="POST">
+    <!-- Listo -->
+    <form class="space-y-6" action= "{% url 'agregar_fruta' %}" method="POST">
       {% csrf_token %}
 
       <div>
@@ -28,7 +29,7 @@ Agregar frutas
         </label>
         <input type="text" id="fruitImg" name="imagen" 
           class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors"
-          placeholder="Ej: Manzana">
+          placeholder="Ej: URL">
       </div>
 
       <div>
@@ -36,9 +37,10 @@ Agregar frutas
           Precio
         </label>
         <!-- Corregir el error con la coma de django -->
+          <!-- Listo -->
         <div class="relative">
           <span class="absolute left-3 top-2 text-gray-500">NIO</span>
-          <input type="number" id="price" name="precio" min="0" step="0.01"
+          <input value="{{ fruta.precio|stringformat:'.2f' }}" type="number" id="price" name="precio" min="0" step="0.01"
             class="w-full pl-8 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors"
             placeholder="0.00">
         </div>
@@ -65,7 +67,8 @@ Agregar frutas
           Guardar Fruta
         </button>
         <!-- En el href agregar un url que me redirija hacia donde están todas las frutas -->
-        <a href="">
+          <!-- Listo -->
+        <a href="{% url 'main' %}">
           <button type="button"
             class="flex-1 bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors duration-300">
             Cancelar

@@ -1,9 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 from .models import Fruta, Categoria
-
-
 
 # Create your views here.
 def main(request):
@@ -22,9 +20,9 @@ def agregar_fruta(request):
     categorias = Categoria.objects.all()
     
     if request.method == 'POST':
-        nombre = ''
-        precio = ''
-        imagen = ''
+        nombre = request.POST.get('nombre', '').strip()
+        precio = request.POST.get('precio', '').strip()
+        imagen = request.POST.get('imagen', '').strip()
         # Acá estamos recibiendo un ID de categoría, NO la categoría
         categoria_id = request.POST.get('categoria')
         
@@ -32,9 +30,14 @@ def agregar_fruta(request):
         categoria = Categoria.objects.get(id=categoria_id)
         
         # Hacen falta campos (parte de la tarea)
+        #Ya los agregué
         try:
             # request.user es el objeto de usuario que mandó la solicitud
-            fruta = Fruta(categoria=categoria, proveedor=request.user)
+            fruta = Fruta(nombre = nombre,
+            precio = float(precio),
+            imagen = imagen,
+            categoria=categoria, 
+            proveedor=request.user)
             fruta.save()
         
         except Exception as e:
